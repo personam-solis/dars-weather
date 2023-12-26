@@ -13,6 +13,7 @@ The below are the libraries that are used outside of the Python 3.11 standard
 library:
 
 * `googlemaps`
+* `cryptography`
 
 <br>
 

@@ -1,4 +1,4 @@
-#!/usr/env python3
+#!/usr/bin/env python3
 
 """
 Get the weather data for the location chosen by the user. This leverages the
@@ -12,8 +12,7 @@ Google Map API is needed to convert location to a geojson.
 import requests
 import json
 import googlemaps
-from datetime import datetime
-import globalDecorators as gd
+# import globalDecorators as gd
 from main import *
 
 
@@ -40,7 +39,7 @@ def get_location(api_key: str, input_location: str) -> dict:
     return geocode_result[0]['geometry']['location']
 
 
-def nsw_url(base_url: str, api_header: str, geo_location: dict) -> str:
+def nsw_url(base_url: str, geo_location: dict, date_given: str) -> str:
     """
     Generate a URL to the National Weather Service (NSW) API. The API does not
     accept more than four decimal places for the lat lng when connecting to the
@@ -48,19 +47,22 @@ def nsw_url(base_url: str, api_header: str, geo_location: dict) -> str:
 
     Args:
         base_url (str): The base URL of the NSW API
-        api_header (str): The header required to call data from the NSW API
         geo_location (dict): Keys - lat, lng
+        date_given (str): The date that the user entered converted into
+            YYYY-MM-DDTHH:MM:SSZ
 
     Returns:
         str: Built URL
     """
-    pass
+
+    return f""
 
 
 def main():
     # Run the main part of the program. Takes no arguments
-    user_args = gd.user_input()
-    gd.set_logging(user_args)
+    # user_args = gd.user_input()
+    # gd.set_logging(user_args)
+    pass
 
 
 if __name__ == '__main__':

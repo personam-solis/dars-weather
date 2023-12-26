@@ -1,4 +1,4 @@
-#!/usr/env python3
+#!/usr/bin/env python3
 
 """
 Set global decorators to make it easier to log, time, and debug based on a users

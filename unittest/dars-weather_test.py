@@ -1,16 +1,22 @@
+#!/usr/bin/env python3
+
 import unittest
 import json
 import os
 import earth_weather
-from ..earth_weather import *
+from cryptography.fernet import Fernet
 
-
-print(os.path.join(os.getcwd(), "responses.json"))
-
+current_dir = os.path.abspath(os.path.dirname(__file__))
+parent_dir = os.path.abspath(f"{current_dir}/..")
+print(f"Current Dir: {current_dir} \nParent Dir: {parent_dir}")
 
 # Get Responses for test
-with open(os.path.join(os.path.dirname(__file__), "responses.json")) as responses_file:
+with open(os.path.join(current_dir, "responses.json")) as responses_file:
     responses = json.load(responses_file)
+
+# Get encrypted API Keys
+with open(os.path.join(parent_dir, "keys.json")) as keys_file:
+    all_keys = json.load(keys_file)
 
 # Set up the user responses
 geo = earth_weather.get_location(responses['globals']['google_api_key'],

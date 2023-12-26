@@ -1,0 +1,15 @@
+{
+  "globals": {
+    "user_agent_header": "dars-weather.com kevin.phate@gmail.com",
+    "base_weather_url": "https://api.weather.gov",
+    "google_api_key": "AIzaSyAn64xOw5SAj6JTfiE1ZaNHsFzrpYaQKug"
+  },
+  "user_input": {
+    "location": "Denver, Colorado, United States",
+    "date": "2023-11-25"
+  },
+  "geo": {
+    "lat": 39.74,
+    "lng":-104.99
+  }
+}

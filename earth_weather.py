@@ -2,7 +2,7 @@
 
 """
 Get the weather data for the location chosen by the user. This leverages the
-Google cloud API to get the GerJSON. Limit its use to avoid having to pay for
+Google cloud API to get the GeoJSON. Limit its use to avoid having to pay for
 things.
 The Weather API is from the National Weather Service (NWS) api.weather.gov
 
@@ -54,6 +54,7 @@ def nsw_url(base_url: str, api_header: str, geo_location: dict) -> str:
     Returns:
         str: Built URL
     """
+    pass
 
 
 def main():

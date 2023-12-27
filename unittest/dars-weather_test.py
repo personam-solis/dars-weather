@@ -4,7 +4,7 @@ import unittest
 import json
 import os
 import earth_weather
-from cryptography.fernet import Fernet
+import main
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 parent_dir = os.path.abspath(f"{current_dir}/..")
@@ -16,14 +16,28 @@ with open(os.path.join(current_dir, "responses.json")) as responses_file:
 
 # Get encrypted API Keys
 with open(os.path.join(parent_dir, "keys.json")) as keys_file:
-    all_keys = json.load(keys_file)
+    imported_keys = json.load(keys_file)
 
 # Set up the user responses
-geo = earth_weather.get_location(responses['globals']['google_api_key'],
+user_args = main.user_input()
+
+geo = earth_weather.get_location(main.secret_decrypter(user_args.key,
+                                                       imported_keys["google_api"]["ciphertext"]),
                                  responses['user_input']['location'])
 
 
 class MyTestCase(unittest.TestCase):
+
+    # Decrypt keys and compare to the first six characters of plaintext
+    def test_keys(self):
+        # Test first six of Google API
+        self.assertEqual(str(main.secret_decrypter(user_args.key,
+                                                   imported_keys["google_api"]["ciphertext"]))[:6],
+                         responses["key_six"]["google_api"])
+        # Test Failure
+        self.assertNotEqual(str(main.secret_decrypter(user_args.key,
+                                                      imported_keys["google_api"]["ciphertext"]))[:6],
+                            responses["key_six"]["FAIL"])
 
     def test_location_info(self):
         print('Test location_info')

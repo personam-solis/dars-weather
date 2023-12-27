@@ -1,3 +1,5 @@
 {
-  "google_api": "gAAAAABliyn6yu19aE7KxfecbfinnuGsqxXigVehAP-k8tf5tUbJgCPmY7AO7CBe8Ft3xr-tCnhcpP8tqDSrxzXg1IfaRgXphpq9Abm6IbprtG4mdTTL9xhdVhzO4KXUVDhukmiyn101"
+  "google_api": {
+    "ciphertext" : "gAAAAABli2-apqIILQxBgOmpnQ4NZOOcWiE0eYVqTVfYTzYuVbJ9bHKptuM1Pz8w6I1vNx1moRpNLKC1WGCiy3dbVV3-BAJYa9TGdErq9mAWzerEeCVPaIP7CwgWFB70t5Tu0ItqCKgL"
+  }
 }

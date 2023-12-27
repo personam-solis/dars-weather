@@ -1,8 +1,7 @@
 {
   "globals": {
     "user_agent_header": "dars-weather.com kevin.phate@gmail.com",
-    "base_weather_url": "https://api.weather.gov",
-    "google_api_key": "AIzaSyAn64xOw5SAj6JTfiE1ZaNHsFzrpYaQKug"
+    "base_weather_url": "https://api.weather.gov"
   },
   "user_input": {
     "location": "Denver, Colorado, United States",
@@ -11,5 +10,9 @@
   "geo": {
     "lat": 39.74,
     "lng":-104.99
+  },
+  "key_six": {
+    "FAIL": "XXXXXX",
+    "google_api": "AIzaSy"
   }
 }

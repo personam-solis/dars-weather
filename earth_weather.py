@@ -13,7 +13,6 @@ import requests
 import json
 import googlemaps
 # import globalDecorators as gd
-from main import *
 
 
 def get_location(api_key: str, input_location: str) -> dict:

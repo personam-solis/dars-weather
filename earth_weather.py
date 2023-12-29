@@ -69,12 +69,14 @@ def get_weather(api_url: str, api_header: dict) -> dict|str:
         dict: The weather data
     """
 
-    first_request = requests.get(api_url, headers=api_header).json()
+    try:
+        # Get response with all properties associated with geo
+        property_request = requests.get(api_url, headers=api_header).json()
 
-    request_stations = first_request["properties"]["observationStations"]
+        # Get the
+        stations = property_request["properties"]["observationStations"]
 
-    stations = requests.get(url='https://api.weather.gov/gridpoints/LWX/97,71/stations',
-                            headers=api_header).json()
+
 
 
 

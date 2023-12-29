@@ -38,7 +38,7 @@ def get_location(api_key: str, input_location: str) -> dict:
     return geocode_result[0]['geometry']['location']
 
 
-def nsw_url(base_url: str, geo_location: dict, date_given: str) -> str:
+def nsw_url(base_url: str, geo_location: dict) -> str:
     """
     Generate a URL to the National Weather Service (NSW) API. The API does not
     accept more than four decimal places for the lat lng when connecting to the
@@ -47,14 +47,36 @@ def nsw_url(base_url: str, geo_location: dict, date_given: str) -> str:
     Args:
         base_url (str): The base URL of the NSW API
         geo_location (dict): Keys - lat, lng
-        date_given (str): The date that the user entered converted into
-            YYYY-MM-DDTHH:MM:SSZ
 
     Returns:
         str: Built URL
     """
 
-    return f""
+    return f"{base_url}/points/{geo_location['lat']},{geo_location['lng']}"
+
+
+def get_weather(api_url: str, api_header: dict) -> dict|str:
+    """
+    Retrieve the weather from the NSW API and return the data as a dictionary.
+    This requires two requests. One that obtains the "properties" to grab the
+    weather URL, then using that URL pull the full data.
+
+    Args:
+        api_url (str): URL generated based on location and time
+        api_header (dict): Header for the request
+
+    Returns:
+        dict: The weather data
+    """
+
+    first_request = requests.get(api_url, headers=api_header).json()
+
+    request_stations = first_request["properties"]["observationStations"]
+
+    stations = requests.get(url='https://api.weather.gov/gridpoints/LWX/97,71/stations',
+                            headers=api_header).json()
+
+
 
 
 def main():

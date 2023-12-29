@@ -16,7 +16,7 @@ from cryptography.fernet import Fernet
 
 
 # Variables
-user_agent_header = 'dars-weather.com kevin.phate@gmail.com'
+user_agent_header = {'User-Agent': 'dars-weather.com, kevin.phate@gmail.com'}
 base_weather_url = 'https://api.weather.gov'
 current_dir = os.path.abspath(os.path.dirname(__file__))
 

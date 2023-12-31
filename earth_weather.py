@@ -10,9 +10,7 @@ Google Map API is needed to convert location to a geojson.
 """
 
 import requests
-import json
 import googlemaps
-# import globalDecorators as gd
 
 
 def get_location(api_key: str, input_location: str) -> dict:
@@ -55,11 +53,10 @@ def nsw_url(base_url: str, geo_location: dict) -> str:
     return f"{base_url}/points/{geo_location['lat']},{geo_location['lng']}"
 
 
-def get_weather(api_url: str, api_header: dict) -> dict|str:
+def get_weather_station(api_url: str, api_header: dict) -> str:
     """
-    Retrieve the weather from the NSW API and return the data as a dictionary.
-    This requires two requests. One that obtains the "properties" to grab the
-    weather URL, then using that URL pull the full data.
+    Retrieve the weather station ID used to get the weather data. This will perform
+    three API calls to the NWS API.
 
     Args:
         api_url (str): URL generated based on location and time
@@ -73,21 +70,42 @@ def get_weather(api_url: str, api_header: dict) -> dict|str:
         # Get response with all properties associated with geo
         property_request = requests.get(api_url, headers=api_header).json()
 
-        # Get the
-        stations = property_request["properties"]["observationStations"]
+        # Get the cluster of observation stations
+        observation_stations = property_request["properties"]["observationStations"]
+
+        # Get the closest observation statin
+        nearby_stations = requests.get(url=observation_stations,
+                                       headers=api_header).json()
+
+        # Get the station ID of closet one
+        return nearby_stations['features'][0]['properties']["stationIdentifier"]
+
+    except (requests.exceptions.RequestException, requests.JSONDecodeError) as error:
+        print(f"An error occurred connecting to the server\n{error}")
 
 
+def get_weather_data(base_url: str, api_header: dict, station_id: str) -> dict:
+    """
+    Retrieve the weather from the NSW API and return the data as a dictionary.
+    This requires two requests. One that obtains the "properties" to grab the
+    weather URL, then using that URL pull the full data.
 
+    Args:
+        base_url (str): Base URL of the NSW
+        api_header (dict): Header for the request
+        station_id (str): ID retrieved closest to the cluster
 
+    Returns:
+        data (dict): JSON formatted weather data
+    """
+    try:
+        return requests.get(url=f"{base_url}/stations/{station_id}/observations",
+                            headers=api_header).json()
 
-
-def main():
-    # Run the main part of the program. Takes no arguments
-    # user_args = gd.user_input()
-    # gd.set_logging(user_args)
-    pass
+    except (requests.exceptions.RequestException, requests.JSONDecodeError) as error:
+        print(f"An error occurred connecting to the server\n{error}")
 
 
 if __name__ == '__main__':
-    # Execute main code
-    main()
+    # Dont do anything if called
+    pass

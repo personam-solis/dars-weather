@@ -6,9 +6,6 @@ Run the primary interface of the program including a user interface.
 This should primarily call on the other modules for references
 """
 
-import tkinter as tk
-# import globalDecorators as gd
-import datetime
 import json
 import os
 import argparse

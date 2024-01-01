@@ -14,6 +14,9 @@ library:
 
 * `googlemaps`
 * `cryptography`
+* GUI:
+** `pyqt5`
+** `pyqt5-tools`
 
 <br>
 

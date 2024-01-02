@@ -5,25 +5,8 @@ large_font = ("Arial", 24, "bold")
 regular_font = ("Arial", 12)
 
 
-def main_window():
-    # Main Tinker Window
-    base_window = tk.Tk()
-    base_window.title('DArs-Weather')
-    base_window.geometry('800x600')
-    base_window.grid()
-    # window = tk.Canvas(base_window, width=10000, height=10000, bg='black', bd=10)
-    header = tk.Label(base_window, anchor="n", justify='left', font=('Arial', 24),
-                      text='DArs-Weather')
-    description = tk.Label(base_window, anchor='n', justify='left', font='Arial',
-                           text="""
-DArs-Weather is a simple weather app that allows you to get weather of the city
-selected. It writes the weather data from the National Weather Service (NWS)
-into a database, then gets any comparable metrics from that of Elysium Planitia
-on Mars.""")
-    header.grid(row=0, column=0, sticky='nw', pady=2)
-    description.grid(row=1, sticky='n', pady=2)
-
-    return base_window
+def retrieve_input(user_input):
+    return user_input.get("1.0", 'end-1c')
 
 
 class MainApp(tk.Tk):
@@ -52,7 +35,7 @@ class MainApp(tk.Tk):
         self.runbutton = RunButton(container, self)
 
         # Draw and position frames
-        self.header.grid(row=0, column=0, sticky="n")
+        self.header.grid(row=0, column=0, sticky="nw")
         self.description.grid(row=1, column=0, sticky="w", columnspan=3)
         self.locationdescr.grid(row=2, column=0, sticky="w")
         self.apikeydescr.grid(row=3, column=0, sticky="w")
@@ -60,54 +43,68 @@ class MainApp(tk.Tk):
         self.apikeyinput.grid(row=3, column=2, sticky="e")
         self.runbutton.grid(row=4, column=0, sticky="s", columnspan=3)
 
+        self.location = self.locationinput.location
+        self.apikey = self.apikeyinput.apikey
+
 
 class Header(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Header")
+        label = tk.Label(self, justify='left', font=large_font, text='DArs-Weather')
         label.pack(padx=10, pady=10)
 
 
 class Description(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Description")
+        label = tk.Label(self, justify='left', font=regular_font, text="""
+DArs-Weather is a simple weather app that allows you to get weather of the city
+selected. It writes the weather data from the National Weather Service (NWS)
+into a database, then gets any comparable metrics from that of Elysium Planitia
+on Mars.""")
         label.pack(padx=10, pady=10)
 
 
 class LocationDescr(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Enter City and State:")
+        label = tk.Label(self, font=regular_font, text="Enter City and State:")
         label.pack(padx=10, pady=10)
 
 
 class APIKeyDescr(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Enter API Key:")
+        label = tk.Label(self, font=regular_font, text="Enter API Key:")
         label.pack(padx=10, pady=10)
 
 
 class LocationInput(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Location Input")
-        label.pack(padx=10, pady=10)
+        user_input = tk.Text(self, height=1, width=30)
+        self.location = retrieve_input(user_input)
+        user_input.pack()
 
 
 class APIKeyInput(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="API Input")
-        label.pack(padx=10, pady=10)
+        user_input = tk.Text(self, height=1, width=30)
+        self.apikey = retrieve_input(user_input)
+        user_input.pack()
 
 
+def run():
+    pass
+
+
+# Button to run get user input and run main app
 class RunButton(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="RUN!")
-        label.pack(padx=10, pady=10)
+        button = tk.Button(self, text='RUN!', font=regular_font, command=run)
+        button.pack()
 
 
 if __name__ == '__main__':

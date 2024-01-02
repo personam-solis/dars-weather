@@ -10,6 +10,7 @@ import json
 import os
 import argparse
 from cryptography.fernet import Fernet
+import gui
 
 
 # Variables

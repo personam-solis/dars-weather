@@ -108,6 +108,5 @@ class RunButton(tk.Frame):
 
 
 if __name__ == '__main__':
-    # Run the main part of the program. Takes no arguments
-    dars_app = MainApp()
-    dars_app.mainloop()
+    # Only used to import
+    pass

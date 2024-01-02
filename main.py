@@ -67,6 +67,8 @@ def secret_decrypter(encryption_key: str, ciphertext: str) -> str:
 def main():
     # Run the main part of the program. Takes no arguments
     user_args = user_input()
+    app = gui.MainApp()
+    app.mainloop()
 
 
 if __name__ == '__main__':

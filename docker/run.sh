@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker container run --name weather_db --rm -p 5433:5432 -d personamsolis/solis-db
+docker run --name weather_db  -p 5400:5432 -d personamsolis/solis-db

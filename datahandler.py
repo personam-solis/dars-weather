@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import psycopg2 as pg2
 import pandas as pd
 import globalDecorators as gd
@@ -25,11 +24,29 @@ def import_example(file: str) -> dict:
     return data
 
 
+def data_normalizer(data: dict) -> pd.DataFrame:
+    """
+    Takes in a geoJSON dictionary and formats it into a standard usable format
+    using pandas. This also normalizes the data and, converts the dates, and
+    accepts None values.
+
+    Args:
+        data (dict): geoJSON
+
+    Returns:
+        pandas.DataFrame
+    """
+    # get the full json and select the "properties" key
+    return pd.json_normalize(data=data['properties'], errors='ignore')
+
+
 def main():
     # Run the main part of the program. Takes no arguments
     # temp
     current_dir = os.path.abspath(os.path.dirname(__file__))
-    import_example(os.path.join(current_dir, 'example.geojson'))
+    geo_json = import_example(os.path.join(current_dir, 'example.geojson'))
+    normalized_json = data_normalizer(data=geo_json)
+    print(normalized_json.dtypes)
 
 
 if __name__ == '__main__':

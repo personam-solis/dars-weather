@@ -32,6 +32,7 @@ class MainApp(tk.Tk):
         self.apikeydescr = APIKeyDescr(container, self)
         self.locationinput = LocationInput(container, self)
         self.apikeyinput = APIKeyInput(container, self)
+        self.debugcheck = DebugCheck(container, self)
         self.runbutton = RunButton(container, self)
 
         # Draw and position frames
@@ -41,7 +42,8 @@ class MainApp(tk.Tk):
         self.apikeydescr.grid(row=3, column=0, sticky="w")
         self.locationinput.grid(row=2, column=2, sticky="e")
         self.apikeyinput.grid(row=3, column=2, sticky="e")
-        self.runbutton.grid(row=4, column=0, sticky="s", columnspan=3)
+        self.debugcheck.grid(row=4, column=0, sticky="w")
+        self.runbutton.grid(row=5, column=0, sticky="s", columnspan=3)
 
         self.location = self.locationinput.location
         self.apikey = self.apikeyinput.apikey
@@ -93,6 +95,14 @@ class APIKeyInput(tk.Frame):
         user_input = tk.Text(self, height=1, width=30)
         self.apikey = retrieve_input(user_input)
         user_input.pack()
+
+
+class DebugCheck(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        debug_check = tk.Checkbutton(self, text="Debug", onvalue=True,
+                                     offvalue=False, variable=self.debug)
+        debug_check.pack()
 
 
 def run():

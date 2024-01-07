@@ -17,6 +17,10 @@ import gui
 user_agent_header = {'User-Agent': 'dars-weather.com, kevin.phate@gmail.com'}
 base_weather_url = 'https://api.weather.gov'
 current_dir = os.path.abspath(os.path.dirname(__file__))
+db_name = 'weather'
+db_user = 'postgres'
+db_passwd = 'password'
+db_port = 5400
 
 # All keys encrypted with Fernet
 with open(os.path.join(current_dir, "keys.json")) as keys_file:

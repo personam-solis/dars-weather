@@ -8,7 +8,7 @@ The Weather API is from the National Weather Service (NWS) api.weather.gov
 
 Google Map API is needed to convert location to a geojson.
 """
-
+import argparse
 import requests
 import googlemaps
 
@@ -104,6 +104,16 @@ def get_weather_data(base_url: str, api_header: dict, station_id: str) -> dict:
 
     except (requests.exceptions.RequestException, requests.JSONDecodeError) as error:
         print(f"An error occurred connecting to the server\n{error}")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    input_args = parser.parse_args()
+
+    if all(value is False or value is None
+           for value in vars(input_args).values()):
+        parser.print_help()
+        raise argparse.ArgumentError("No argument given but required")
 
 
 if __name__ == '__main__':

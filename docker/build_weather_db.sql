@@ -1,5 +1,31 @@
-CREATE ROLE postgres with login SUPERUSER PASSWORD 'password';
+-- Build the weather database used for both non/terrestrial planets
 
 CREATE TABLE earth_weather_full (
-    account_id serial PRIMARY KEY,
-    name VARCHAR (50) NOT NULL);
+    id serial PRIMARY KEY,
+    city VARCHAR (15),
+    datetime TIMESTAMP,
+    dewpoint FLOAT (4),
+    maxTemperature FLOAT (4),
+    minTemperature FLOAT (4),
+    relativeHumidity SMALLINT,
+    apparentTemperature FLOAT (4),
+    wetBulbGlobeTemperature FLOAT (4),
+    heatIndex FLOAT (4),
+    windChill FLOAT (4),
+    skyCover SMALLINT,
+    windDirection SMALLINT,
+    windSpeed FLOAT (4),
+    windGust FLOAT (4),
+    weather VARCHAR (15),
+    probabilityOfPrecipitation SMALLINT,
+    quantitativePrecipitation FLOAT (4),
+    iceAccumulation FLOAT (4),
+    snowfallAmount FLOAT (4),
+    visibility FLOAT (4),
+    transportWindSpeed FLOAT (4),
+    transportWindDirection SMALLINT,
+    mixingHeight FLOAT (4),
+    lightningActivityLevel SMALLINT,
+    probabilityOfThunder SMALLINT,
+    atmosphericDispersionIndex SMALLINT,
+    lowVisibilityOccurrenceRiskIndex SMALLINT);
